@@ -6,6 +6,7 @@
 body {
   margin: 0;
   font-family: Helvetica, sans-serif;
+  background-color: #F3F3F4
 }
 
 /* Style the top navigation bar */
@@ -14,7 +15,7 @@ body {
   background-color: #333;
 }
 
-/* Style the topnav links */
+/* Style the topnav links -- except I need to put them in their own classes */
 .nav a {
   float: left;
   display: block;
