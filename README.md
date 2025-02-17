@@ -1,2 +1,2 @@
 # lis500
-My name is Indigo Clark and I love to draw and read! Like many people do.
+This website is by Haku Altanpurev and Indigo Clark for LIS 500 at UW-Madison. We hope you enjoy!
