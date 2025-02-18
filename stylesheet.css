@@ -207,3 +207,7 @@ iframe {
 .header {
   min-height: 133px;
 }
+
+.ttext {
+  text-align: justify;
+}
