@@ -23,7 +23,6 @@ body {
 
 /* Style the topnav links -- except I need to put them in their own classes */
 .nav a {
-  float: left;
   display: block;
   color: #14110F;
   text-align: center;
@@ -34,7 +33,7 @@ body {
 /* Change color on hover */
 .nav a:hover {
   background-color: #F3F3F4;
-  color: #7E7F83;
+  color: #FFA2B6;
 }
 
 /* Style the footer */
