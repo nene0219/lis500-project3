@@ -1,50 +1,90 @@
 * {
   box-sizing: border-box;
   font-family: Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 70px;
+  font-family: Helvetica, sans-serif;
+  background-color: #EBE9E1;
+  color: #14110F;
 }
 
 header {
   background-color: #E43D12;
   color: #EBE9E1;
   text-align: center;
-    }
-
-body {
-  margin: 70px;
-  font-family: Helvetica, sans-serif;
-  background-color: #EBE9E1
+  padding: 20px 0;
+  font-size: 1.5em;
+  font-weight: bold;
+  border-bottom: 5px solid #D6536D;
 }
 
-/* Style the top navigation bar */
 .nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  padding-top: 10px;
+  padding: 15px;
+  background-color: #D6536D;
+  border-bottom: 3px solid #EFB11D;
 }
 
-/* Style the topnav links -- except I need to put them in their own classes */
 .nav a {
   display: block;
-  color: #14110F;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-/* Change color on hover -- bg is white and text is pink */
-.nav a:hover {
-  background-color: #F3F3F4;
-  color: #FFA2B6;
-}
-
-/* Style the footer */
-.footer {
   color: #EBE9E1;
-  background-color: #34312D;
-  padding: 10px;
   text-align: center;
+  padding: 12px 20px;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav a:hover {
+  background-color: #FFA2B6;
+  color: #14110F;
+}
+
+.main-content {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+  padding: 30px;
+}
+
+.intro {
+  background-color: #EFB11D;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  color: #14110F;
+  margin-bottom: 2em;
+}
+
+.intro h4 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #E43D12;
+}
+
+.button {
+  display: inline-block;
+  background-color: #E43D12;
+  color: #EBE9E1;
+  padding: 12px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  margin: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #D6536D;
 }
 
 .container {
@@ -52,39 +92,118 @@ body {
   align-items: flex-start;
   max-width: 800px;
   margin: auto;
+  padding: 20px;
+  background-color: #FFA2B6;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
+
 .container img {
   max-width: 200px;
   height: auto;
   margin-right: 20px;
   border-radius: 10px;
-  margin-top: 5em;
-}
-.text {
-  flex: 1;
+  border: 3px solid #E43D12;
 }
 
-.button {
-  display: inline-block;
-  background-color: #f44336;
-  color: #fff;
-  padding: 10px 20px;
+.text {
+  flex: 1;
+  color: #14110F;
+}
+
+.resource-section {
+  background-color: #D6536D;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 10px;
+  text-align: center;
+  color: #EBE9E1;
+}
+
+.resource-section h2 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  color: #EFB11D;
+}
+
+.resource-links a {
+  display: block;
+  color: #EBE9E1;
+  padding: 10px;
   text-decoration: none;
-  border-radius: 5px;
-  margin: 10px 1em;
+  transition: color 0.3s ease;
 }
-.button:hover {
-  background-color: #d32f2f;
+
+.resource-links a:hover {
+  color: #FFA2B6;
 }
+
+.footer {
+  color: #EBE9E1;
+  background-color: #34312D;
+  padding: 15px;
+  text-align: center;
+  margin-top: 50px;
+  border-top: 5px solid #E43D12;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  margin: 40px 0;
+}
+
 iframe {
   display: block;
   margin: 20px 0;
   max-width: 100%;
+  border-radius: 10px;
+  border: 3px solid #D6536D;
 }
 
-.center-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.about-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  background: #FFA2B6;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 750px;
+}
+
+.profile img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+  border: 3px solid #E43D12;
+}
+
+.profile-text {
+  flex: 1;
+}
+
+.profile h2 {
+  color: #E43D12;
+  margin-bottom: 8px;
+}
+
+.profile p {
+  font-size: 0.95em;
+}
+
+.header {
+  min-height: 133px;
 }
