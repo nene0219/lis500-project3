@@ -4,7 +4,7 @@
 }
 
 header {
-  background-color: #E43D12
+  background-color: #E43D12;
   color: #EBE9E1;
   text-align: center;
     }
@@ -41,7 +41,8 @@ body {
 
 /* Style the footer */
 .footer {
-  color: #EBE9E1
+  color: #EBE9E1;
   background-color: #34312D;
   padding: 10px;
+  text-align: center;
 }
