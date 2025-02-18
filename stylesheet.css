@@ -4,21 +4,24 @@
 }
 
 header {
-  background-color: #E43D12
+  background-color: #E43D12;
   color: #EBE9E1;
   text-align: center;
     }
 
 body {
-  margin: 0;
+  margin: 70px;
   font-family: Helvetica, sans-serif;
   background-color: #EBE9E1
 }
 
 /* Style the top navigation bar */
 .nav {
-  overflow: hidden;
-  background-color: #333;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 10px;
 }
 
 /* Style the topnav links -- except I need to put them in their own classes */
@@ -30,7 +33,7 @@ body {
   text-decoration: none;
 }
 
-/* Change color on hover */
+/* Change color on hover -- bg is white and text is pink */
 .nav a:hover {
   background-color: #F3F3F4;
   color: #FFA2B6;
@@ -38,9 +41,10 @@ body {
 
 /* Style the footer */
 .footer {
-  color: #EBE9E1
+  color: #EBE9E1;
   background-color: #34312D;
   padding: 10px;
+  text-align: center;
 }
 
 .container {
