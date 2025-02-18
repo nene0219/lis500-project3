@@ -42,3 +42,45 @@ body {
   background-color: #34312D;
   padding: 10px;
 }
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  max-width: 800px;
+  margin: auto;
+}
+.container img {
+  max-width: 200px;
+  height: auto;
+  margin-right: 20px;
+  border-radius: 10px;
+  margin-top: 5em;
+}
+.text {
+  flex: 1;
+}
+
+.button {
+  display: inline-block;
+  background-color: #f44336;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin: 10px 1em;
+}
+.button:hover {
+  background-color: #d32f2f;
+}
+iframe {
+  display: block;
+  margin: 20px 0;
+  max-width: 100%;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
