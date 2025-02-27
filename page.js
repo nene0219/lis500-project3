@@ -14,6 +14,10 @@ $(document).ready(function () {
                 $(this).addClass("active");
             }
         });
+
+        $(".logo").click(function () {
+            window.location.href = "index.html";
+        });
     });
 
     //for mobile/tablet users, handle the burger menu state
