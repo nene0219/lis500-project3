@@ -456,6 +456,7 @@ body {
     color: #14110F;
     margin-bottom: 40px;
     border-radius: 10px;
+    background-image: url('bg_mask3.png');
 }
 
 .hero h1 {
