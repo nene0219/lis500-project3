@@ -293,6 +293,55 @@ header {
     margin: 40px 0;
 }
 
+/* Webcam Container */
+#webcam-container {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    border: 2px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+/* Prediction Container & Rows */
+#prediction-container {
+    margin-top: 20px;
+}
+
+.prediction-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.prediction-label {
+    width: 100px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.progress-container {
+    flex: 1;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin-right: 10px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background: #004080;
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.prediction-percentage {
+    width: 60px;
+    text-align: right;
+}
+
 /*
     Used to style the youtube embedded iframes
  */
@@ -382,6 +431,16 @@ body {
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: left;
+
+    > ul {
+        padding-left: 36px;
+    }
+
+    > ul li {
+        margin-bottom: 10px;
+        padding-left: 20px;
+        position: relative;
+    }
 }
 
 .resource-card h2 {

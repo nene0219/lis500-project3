@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>LIS 500 - Resources</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <!-- jQuery (if needed for other page functions) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<!-- Header / Navigation -->
+<header class="header">
+    <!-- Navbar loaded dynamically via page.js -->
+</header>
+
+<main class="main-content">
+    <!-- Project Statement Section -->
+    <section class="intro">
+        <h1>Project Statement</h1>
+        <p>proj statement here</p>
+    </section>
+
+    <!-- Other Resource Cards (Objectives, Data Curation, Lessons Learned, etc.) -->
+    <div class="resource-card">
+        <h2>Project Objectives</h2>
+        <ul>
+            <li>Develop an accurate AI model for classifying recyclable items from images.</li>
+            <li>Source diverse training data from multiple continents to ensure global representation.</li>
+            <li>Educate users on recycling categories through simple, real-time feedback.</li>
+            <li>Address biases in AI systems by aligning our project with insights from "Unmasking AI."</li>
+        </ul>
+    </div>
+
+    <div class="resource-card">
+        <h2>Project Objectives (Detailed)</h2>
+        <p>
+            The scope of this project includes developing an AI-driven image classification tool specifically tailored for identifying recyclable materials.
+            Our focus is on accurately categorizing common recyclables such as plastics, metals, glass, and paper using machine learning models built with Teachable Machine.
+            The dataset is intentionally curated to represent a variety of global contexts, reducing biases and increasing the effectiveness of the tool worldwide.
+            The implementation will include real-time interaction, educational feedback, and practical guidance to support users' recycling decisions,
+            ultimately promoting greater sustainability awareness and environmental responsibility.
+        </p>
+    </div>
+
+    <div class="resource-card">
+        <h2>Data Curation</h2>
+        <p>
+            For our dataset curation, we gathered images from diverse sources including Google, Reddit, and various online discussion boards, ensuring comprehensive geographic representation from Africa, Europe, North America, South America, Asia, and Australia.
+            To achieve balanced coverage, we aimed for approximately four representative images per continent for each recyclable material: plastic, paper, glass, and metal.
+            This selection strategy captures global variations in recycling materials, thereby improving the accuracy of our classifier across different regions and communities.
+        </p>
+    </div>
+
+    <div class="resource-card">
+        <h2>Lessons Learned</h2>
+        <p>
+            Initially, our model often confused paper and cardboard. Despite numerous examples, the visual distinction across regions was ambiguous. We resolved this by combining them into one "paper" category, which improved classifier performance.
+            We also discovered that recyclable items, like glass bottles, differ in appearance across continents.
+            Increasing the number of training epochs further sharpened the model’s recognition and performance.
+        </p>
+    </div>
+
+    <!-- Teachable Machine AI Model Section -->
+    <div class="resource-card">
+        <h2>Teachable Machine Image Model</h2>
+        <p>
+            Click the button below to start the model. It will request access to your webcam and then display real-time predictions (for glass, paper, metal, and plastic) as progress bars.
+        </p>
+        <button id="start-btn" type="button" onclick="init()">Start Model</button>
+        <div id="webcam-container"></div>
+        <div id="prediction-container"></div>
+    </div>
+</main>
+
+<footer class="footer">
+    <p>Haku Altanpurev and Indigo Clark, 2025.</p>
+</footer>
+
+<!-- Teachable Machine and TensorFlow.js Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+
+<!-- Improved Script with Visual Prediction Display -->
+<script type="text/javascript">
+    const URL = "https://teachablemachine.withgoogle.com/models/-v-Hne_8m/";
+
+    let model, webcam, maxPredictions;
+
+    // Initialize the model and webcam
+    async function init() {
+        const modelURL = URL + "model.json";
+        const metadataURL = URL + "metadata.json";
+
+        try {
+            model = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
+        } catch (error) {
+            console.error("Error loading model:", error);
+            document.getElementById("prediction-container").innerHTML =
+                "<p class='error'>Error loading the model. Please try again later.</p>";
+            return;
+        }
+
+        // Setup webcam with flip option
+        webcam = new tmImage.Webcam(200, 200, true);
+        try {
+            await webcam.setup(); // request camera permissions
+        } catch (err) {
+            console.error("Camera setup error:", err);
+            document.getElementById("prediction-container").innerHTML =
+                "<p class='error'>Camera permission is required. Please allow access to the camera and refresh the page.</p>";
+            return;
+        }
+
+        // Play the webcam stream and start the loop
+        await webcam.play();
+        window.requestAnimationFrame(loop);
+
+        // Display the webcam feed
+        const webcamContainer = document.getElementById("webcam-container");
+        webcamContainer.innerHTML = "";
+        webcamContainer.appendChild(webcam.canvas);
+
+        // Build the prediction container: one row per prediction class
+        const predictionContainer = document.getElementById("prediction-container");
+        predictionContainer.innerHTML = "";
+        for (let i = 0; i < maxPredictions; i++) {
+            const row = document.createElement("div");
+            row.className = "prediction-row";
+
+            const labelSpan = document.createElement("span");
+            labelSpan.className = "prediction-label";
+            labelSpan.textContent = "Class " + (i + 1); // will be updated with actual class names later
+
+            const progressContainer = document.createElement("div");
+            progressContainer.className = "progress-container";
+
+            const progressBar = document.createElement("div");
+            progressBar.className = "progress-bar";
+            progressContainer.appendChild(progressBar);
+
+            const percentageSpan = document.createElement("span");
+            percentageSpan.className = "prediction-percentage";
+            percentageSpan.textContent = "0.00%";
+
+            row.appendChild(labelSpan);
+            row.appendChild(progressContainer);
+            row.appendChild(percentageSpan);
+            predictionContainer.appendChild(row);
+        }
+    }
+
+    // Loop function to continuously update the webcam and predict
+    async function loop() {
+        webcam.update();
+        await predict();
+        window.requestAnimationFrame(loop);
+    }
+
+    // Run predictions on the current webcam frame and update progress bars
+    async function predict() {
+        const predictions = await model.predict(webcam.canvas);
+        const predictionRows = document.getElementsByClassName("prediction-row");
+
+        for (let i = 0; i < maxPredictions; i++) {
+            const probability = predictions[i].probability * 100;
+            // Update label with class name on first iteration (if not already set)
+            const labelSpan = predictionRows[i].getElementsByClassName("prediction-label")[0];
+            if (!labelSpan.dataset.updated) {
+                labelSpan.textContent = predictions[i].className;
+                labelSpan.dataset.updated = "true";
+            }
+            // Update progress bar width
+            const progressBar = predictionRows[i].getElementsByClassName("progress-bar")[0];
+            progressBar.style.width = probability.toFixed(2) + "%";
+            // Update percentage text
+            const percentageSpan = predictionRows[i].getElementsByClassName("prediction-percentage")[0];
+            percentageSpan.textContent = probability.toFixed(2) + "%";
+        }
+    }
+</script>
+
+<script src="page.js"></script>
+</body>
+</html>
