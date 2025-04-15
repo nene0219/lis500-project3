@@ -7,6 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
             integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 <body>
 <!-- Header / Navigation -->
@@ -15,6 +16,11 @@
 </header>
 
 <main class="main-content">
+
+    <div class="resource-card">
+        <h2>Video Introduction</h2>
+        <div class="resource-video" style="position: relative; padding-bottom: 54.6875%; height: 0;"><iframe src="https://www.loom.com/embed/62d887e00e4a4c8f9db58c43c2799cf4?sid=d419df46-53e0-4588-8cef-93a5296d1bfe" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+    </div>
 
     <div class="resource-card">
         <h2>Project Objectives</h2>
@@ -27,7 +33,7 @@
     </div>
 
     <div class="resource-card">
-        <h2>Project Objectives (Detailed)</h2>
+        <h2>Implementation Details</h2>
         <p>
             The scope of this project includes developing an AI-driven image classification tool specifically tailored for identifying recyclable materials.
             Our focus is on accurately categorizing common recyclables such as plastics, metals, glass, and paper using machine learning models built with Teachable Machine.
@@ -61,9 +67,18 @@
         <p>
             Click the button below to start the model. It will request access to your webcam and then display real-time predictions (for glass, paper, metal, and plastic) as progress bars.
         </p>
-        <button id="start-btn" type="button" onclick="init()">Start Model</button>
-        <div id="webcam-container"></div>
+        <button class="button" id="start-btn" type="button" onclick="init()">Start Model</button>
+
+        <!--
+          Wrap webcam & overlay in a single container to place the emoji absolutely over it
+        -->
+        <div id="webcam-wrapper" class="webcam-wrapper"> <!-- <-- added wrapper -->
+            <div id="webcam-container"></div>
+            <div id="emoji-overlay" class="emoji-overlay"></div> <!-- <-- new overlay for emojis -->
+
+        </div>
         <div id="prediction-container"></div>
+
     </div>
 </main>
 
@@ -75,13 +90,22 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 
-<!-- Improved Script with Visual Prediction Display -->
 <script type="text/javascript">
     const URL = "https://teachablemachine.withgoogle.com/models/-v-Hne_8m/";
 
     let model, webcam, maxPredictions;
 
-    // Initialize the model and webcam
+    let rollingPredictions = [];
+
+    const ROLLING_WINDOW_SIZE = 10;
+
+    const labelToEmoji = {
+        "Glass": "🍾",
+        "Metal": "⚙️",
+        "Paper": "📄",
+        "Plastic": "🧴"
+    };
+
     async function init() {
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
@@ -96,10 +120,9 @@
             return;
         }
 
-        // Setup webcam with flip option
         webcam = new tmImage.Webcam(200, 200, true);
         try {
-            await webcam.setup(); // request camera permissions
+            await webcam.setup();
         } catch (err) {
             console.error("Camera setup error:", err);
             document.getElementById("prediction-container").innerHTML =
@@ -107,16 +130,13 @@
             return;
         }
 
-        // Play the webcam stream and start the loop
         await webcam.play();
         window.requestAnimationFrame(loop);
 
-        // Display the webcam feed
         const webcamContainer = document.getElementById("webcam-container");
         webcamContainer.innerHTML = "";
         webcamContainer.appendChild(webcam.canvas);
 
-        // Build the prediction container: one row per prediction class
         const predictionContainer = document.getElementById("prediction-container");
         predictionContainer.innerHTML = "";
         for (let i = 0; i < maxPredictions; i++) {
@@ -125,7 +145,7 @@
 
             const labelSpan = document.createElement("span");
             labelSpan.className = "prediction-label";
-            labelSpan.textContent = "Class " + (i + 1); // will be updated with actual class names later
+            labelSpan.textContent = "Class " + (i + 1);
 
             const progressContainer = document.createElement("div");
             progressContainer.className = "progress-container";
@@ -145,32 +165,70 @@
         }
     }
 
-    // Loop function to continuously update the webcam and predict
     async function loop() {
         webcam.update();
         await predict();
         window.requestAnimationFrame(loop);
     }
 
-    // Run predictions on the current webcam frame and update progress bars
     async function predict() {
         const predictions = await model.predict(webcam.canvas);
         const predictionRows = document.getElementsByClassName("prediction-row");
 
         for (let i = 0; i < maxPredictions; i++) {
             const probability = predictions[i].probability * 100;
-            // Update label with class name on first iteration (if not already set)
             const labelSpan = predictionRows[i].getElementsByClassName("prediction-label")[0];
             if (!labelSpan.dataset.updated) {
                 labelSpan.textContent = predictions[i].className;
                 labelSpan.dataset.updated = "true";
             }
-            // Update progress bar width
             const progressBar = predictionRows[i].getElementsByClassName("progress-bar")[0];
             progressBar.style.width = probability.toFixed(2) + "%";
-            // Update percentage text
             const percentageSpan = predictionRows[i].getElementsByClassName("prediction-percentage")[0];
             percentageSpan.textContent = probability.toFixed(2) + "%";
+        }
+
+        const framePredictions = {};
+        for (let p of predictions) {
+            framePredictions[p.className] = p.probability;
+        }
+        rollingPredictions.push(framePredictions);
+
+        if (rollingPredictions.length > ROLLING_WINDOW_SIZE) {
+            rollingPredictions.shift();
+        }
+
+        const avgScores = {};
+
+        for (let p of predictions) {
+            avgScores[p.className] = 0;
+        }
+
+        for (let fPreds of rollingPredictions) {
+            for (let className in fPreds) {
+                avgScores[className] += fPreds[className];
+            }
+        }
+
+        for (let className in avgScores) {
+            avgScores[className] /= rollingPredictions.length;
+        }
+
+        let bestLabel = null;
+        let bestProb = 0;
+        for (let className in avgScores) {
+            if (avgScores[className] > bestProb) {
+                bestProb = avgScores[className];
+                bestLabel = className;
+            }
+        }
+
+        const emojiOverlay = document.getElementById("emoji-overlay");
+        const THRESHOLD = 0.5;
+        if (bestLabel && bestProb >= THRESHOLD) {
+            emojiOverlay.textContent = labelToEmoji[bestLabel] || "";
+        } else {
+            emojiOverlay.textContent = "";
         }
     }
 </script>

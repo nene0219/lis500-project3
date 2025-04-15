@@ -8,6 +8,31 @@
     padding: 0;
 }
 
+.webcam-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.resource-video {
+    margin-bottom: 20px;
+}
+
+.emoji-overlay {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width: 100px;
+    height: 100px;
+    font-size: 50px;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    bottom: 32px;
+    opacity: 0.3;
+
+
+}
+
 /*
   Enforce a background color for all pages
   and a specific font & color for the text
@@ -220,7 +245,7 @@ header {
 }
 
 .button:hover {
-    background-color: #D6536D;
+    background-color: #000000;
 }
 
 /*
@@ -351,7 +376,7 @@ iframe {
     margin: 20px 0;
     max-width: 100%;
     border-radius: 10px;
-    border: 3px solid #D6536D;
+    border: 3px solid #731902;
 }
 
 .about-container {
