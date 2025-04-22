@@ -15,71 +15,286 @@
     <!-- Navbar loaded dynamically via page.js -->
 </header>
 
-<main class="main-content">
-
-    <div class="resource-card">
-        <h2>Video Introduction</h2>
-        <div class="resource-video" style="position: relative; padding-bottom: 54.6875%; height: 0;"><iframe src="https://www.loom.com/embed/62d887e00e4a4c8f9db58c43c2799cf4?sid=d419df46-53e0-4588-8cef-93a5296d1bfe" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+<main class="main-content ">
+    <div style="background-color: #491001" class="resource-card center-container">
+        <h1 id="nav-title" style="color: white">Project Statement</h1>
     </div>
 
-    <div class="resource-card">
-        <h2>Project Objectives</h2>
-        <ul>
-            <li>Develop an accurate AI model for classifying recyclable items from images.</li>
-            <li>Source diverse training data from multiple continents to ensure global representation.</li>
-            <li>Educate users on recycling categories through simple, real-time feedback.</li>
-            <li>Address biases in AI systems by aligning our project with insights from "Unmasking AI."</li>
-        </ul>
+    <!--
+    Show the 2 navigation buttons, whenever they get clicked they call the
+    helper functions from tmachines.js
+    -->
+    <div class="buttons-nav">
+        <button onclick="showStatement();hideMachine();" href="https://implicit.harvard.edu/implicit/selectatest.html"
+                class="resource-button button-nav">Project Statement
+        </button>
+        <button onclick="hideStatement();showMachine();" href="https://implicit.harvard.edu/implicit/selectatest.html"
+                class="resource-button button-nav">Machine
+        </button>
     </div>
 
-    <div class="resource-card">
-        <h2>Implementation Details</h2>
-        <p>
-            The scope of this project includes developing an AI-driven image classification tool specifically tailored for identifying recyclable materials.
-            Our focus is on accurately categorizing common recyclables such as plastics, metals, glass, and paper using machine learning models built with Teachable Machine.
-            The dataset is intentionally curated to represent a variety of global contexts, reducing biases and increasing the effectiveness of the tool worldwide.
-            The implementation will include real-time interaction, educational feedback, and practical guidance to support users' recycling decisions,
-            ultimately promoting greater sustainability awareness and environmental responsibility.
-        </p>
+    <div id="statement">
+        <div class="resource-card">
+            <h2>Introduction</h2>
+            <p>
+                For project 3, we set out to create an image classification tool using AI to identify recyclable items
+                from across the world. Using Teachable Machines, a tool developed by Google to assist in providing an
+                approachable way to teach the fundamentals of AI classification. On reflecting on Buolamwini’s book,
+                Unmasking AI, it’s interesting to navigate a world in which companies like Google are creating these
+                helpful teaching tools while placing an excess of trust in big data that earns them her criticism. Her
+                ethics and perspective also served as a guiding motivator for this project, since we were very aware of
+                how code is not neutral. We understood that all technical systems are socio-technical systems, that
+                socio-technical systems are not neutral sources of information and serve political agendas. So, we were
+                hyperaware of how we should be teaching the machine to sort something beneficial.
+
+            <p>
+                The reason we chose to do recycling project came from the documentary Coded Bias, which explores how
+                emerging technologies are often tested on marginalized communities, while wealthier populations benefit
+                from more refined, less invasive systems. As Virginia Eubanks explains in Coded Bias, “the most
+                punitive, most invasive, most surveillance-focused tools that we have, they go into poor and working
+                communities first… then they get ported out to other communities” (Kantayya 00:23:28–00:23:47). We
+                observed a similar dynamic in environmental infrastructure, wealthier neighborhoods often have access to
+                efficient and advanced recycling systems, whereas low-income areas are frequently left with inadequate
+                or outdated waste management practices. This imbalance motivated us to create a tool that could make
+                recycling knowledge and classification more accessible, regardless of a user's socioeconomic or
+                geographic context. Our aim was not just technical accuracy, but also equity, to ensure that
+                participation in sustainable practices is not limited by wealth or location.
+            </p>
+
+            <div class="center-image-container">
+                <img src="coded%20bias.jpg
+                        " alt="Coded Bias" width="700" height="350">
+
+            </div>
+
+            <h2>Coded Gaze</h2>
+            <div class="image-text-block">
+                <p> <!-- Add Ruha Benjamin citation, race after tech and intersectionality-->
+                    One of the core ideas from Buolamwini’s work that especially shaped our thinking was her concept of
+                    the
+                    “coded gaze”, which highlights how technology often inherits biases from those who create it. As we
+                    built our recycling classifier, we became increasingly aware of the potential for our own
+                    unconscious
+                    biases to be embedded into our algorithm. Understanding the coded gaze encouraged us to regularly
+                    question our data selection and labeling processes to ensure we weren't unintentionally privileging
+                    certain geographies or cultural contexts over others.
+                </p>
+                <img src="unmasking%20ai.jpeg" alt="Unmasking AI" width="126">
+            </div>
+
+            <p>
+                With that in mind, we also looked at how recycling technologies are actually used in different places.
+                While AI-driven recycling bins have started appearing in various locations, however, these bins are
+                usually found in major cities with advanced infrastructure, limiting access for many communities. To
+                make this type of technology more accessible, we went with a web-based tool that utilizes commonly
+                available webcams. This approach allows a wider range of users, regardless of their location, to take
+                advantage of improved recycling accuracy. Our goal was influenced by Buolamwini's emphasis on making
+                technology inclusive and reducing technological gaps. Through this project, we aim to enable communities
+                everywhere to participate equally in better waste management practices.
+            </p>
+            <p>
+                This focus on inclusivity also reminded us of a moment in the book when Buolamwini met with a delegation
+                from Rwanda during her trip to Brussels, when she stated how her facial recognition bias research could
+                help with the over policing of African Americans, and garnered little sympathy (Buolamwini, 176). She
+                then illustrated that these issues in facial recognition bias may show up differently depending on
+                global context, to which she was told that she should be building new technology instead of critiquing
+                what is not working. Our takeaway was that thoughtful technology production and reflection of potential
+                harms and cross-cultural contexts will only create less problems for us in the future. This sentiment
+                drove many decisions during this project.
+            </p>
+            <p>
+                While building the tool, we also spent time thinking about how it might be used in different parts of
+                the world. Our goal was to improve recycling accuracy, but we realized that if we weren’t careful, the
+                model could end up working better for items more common in wealthier countries and miss others more
+                typical in different regions. Being aware of this helped us focus more on balance and fairness in the
+                way we collected data and trained the model.
+            </p>
+            <p>
+                The image data collected for this project contained images from Australia, Asia, Africa, Europe, and
+                North and South America. The data set was primarily compromised of common recyclables, with the main
+                differences being in the brand featured. This is where a global data set was advisable, since it
+                wouldn’t be as accurate if we only inserted recyclables from Europe and North America. Throughout the
+                development of the tool, we saw firsthand how different glass bottles and other similar items varied
+                across the world. To achieve our goal of a diverse and even range of images, we aimed to start with 4
+                images per continent per 4 types of recyclable materials, with more to come. However, we must always
+                analyze and reevaluate how effective our training data set is, as taking the time to reassess was an
+                insight we gained from Buolamwini’s writings. The labels used to classify images can be an unintended
+                means to insert bias, as where do we draw the line between paper and cardboard? In order to improve the
+                accuracy of our model and reduce misclassification, we grouped the two together.
+            </p>
+            <!--
+            Embed Indigo's loom about the project statement
+            -->
+            <div class="resource-video"
+                 style="position: relative; padding-bottom: 54.6875%; height: 0;margin-bottom: 3em;">
+                <iframe src="https://www.loom.com/embed/d7455117ffb849118299b40aefaeae3c?sid=b70aea4f-b9d6-4454-9d95-67b58ffc5a35"
+                        frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+            </div>
+
+            <h2>Teachable Machines and Data Collection</h2>
+            <p>
+                As we were working with Teachable Machines, we found the platform fairly easy to use, which allowed us
+                to focus more on our data and testing. Initially, we aimed for perfect accuracy, but this led to
+                overfitting, causing the model to perform poorly on new images. Additionally, Teachable Machines
+                auto-cropped training images, sometimes confusing classification categories, for instance, Coca Cola
+                plastic bottles and Coca Cola cans appeared nearly identical after cropping. We also noticed the model's
+                accuracy varied across the day due to lighting issues, leading us to include images under various
+                lighting conditions. These experiences underscored the importance of well-balanced, representative
+                datasets, echoing Buolamwini’s emphasis on accuracy and fairness.
+            </p>
+            <p>
+                Buolamwini's insights into AI ethics made us particularly mindful of transparency and accountability
+                throughout the project. She emphasizes developers' responsibility to clarify how algorithms make
+                decisions, especially when impacting diverse populations. We documented our data sources and
+                classification decisions transparently, openly acknowledging limitations and potential biases inherent
+                in machine learning models.
+            </p>
+            <p>
+                Toward the end of the project, we were still thinking about how larger systems of inequality show up in
+                small ways. Buolamwini’s intersectional approach to her work also motivated ours, as global waste is
+                perpetuated the most by Western countries, whose trash often gets discarded in Africa. This is a global
+                issue that warrants a global data set, so we strived for even representation of recyclable items from
+                all over. There is a gap in consumer recycling knowledge, with people often throwing away items like
+                greasy pizza boxes that are unable to be recycled. Yet, there are certainly limitations, especially with
+                how local recycling rules can vary depending on the facilities nearby, as well as anything else we may
+                not have accounted for.
+            </p>
+            <div class="center-image-container">
+                <img src="PieterHugo.png" alt="Pieter Hugo Photograph" width="580" height="562">
+                <p>
+                    A photograph by Pieter Hugo depicting an e-waste dumping ground in Agbogbloshie, a slum in Accra,
+                    the capital of Ghana.
+                </p>
+            </div>
+        </div>
     </div>
 
-    <div class="resource-card">
-        <h2>Data Curation</h2>
-        <p>
-            For our dataset curation, we gathered images from diverse sources including Google, Reddit, and various online discussion boards, ensuring comprehensive geographic representation from Africa, Europe, North America, South America, Asia, and Australia.
-            To achieve balanced coverage, we aimed for approximately four representative images per continent for each recyclable material: plastic, paper, glass, and metal.
-            This selection strategy captures global variations in recycling materials, thereby improving the accuracy of our classifier across different regions and communities.
-        </p>
-    </div>
-
-    <div class="resource-card">
-        <h2>Lessons Learned</h2>
-        <p>
-            Initially, our model often confused paper and cardboard. Despite numerous examples, the visual distinction across regions was ambiguous. We resolved this by combining them into one "paper" category, which improved classifier performance.
-            We also discovered that recyclable items, like glass bottles, differ in appearance across continents.
-            Increasing the number of training epochs further sharpened the model’s recognition and performance.
-        </p>
-    </div>
-
-    <!-- Teachable Machine AI Model Section -->
-    <div class="resource-card">
-        <h2>Teachable Machine Image Model</h2>
-        <p>
-            Click the button below to start the model. It will request access to your webcam and then display real-time predictions (for glass, paper, metal, and plastic) as progress bars.
-        </p>
-        <button class="button" id="start-btn" type="button" onclick="init()">Start Model</button>
-
+    <div id="machine">
         <!--
-          Wrap webcam & overlay in a single container to place the emoji absolutely over it
+        Embed loom about the teachable machines model
         -->
-        <div id="webcam-wrapper" class="webcam-wrapper"> <!-- <-- added wrapper -->
-            <div id="webcam-container"></div>
-            <div id="emoji-overlay" class="emoji-overlay"></div> <!-- <-- new overlay for emojis -->
+        <div class="resource-card">
+            <h2>Video Introduction</h2>
+            <div class="resource-video" style="position: relative; padding-bottom: 54.6875%; height: 0;">
+                <iframe src="https://www.loom.com/embed/62d887e00e4a4c8f9db58c43c2799cf4?sid=d419df46-53e0-4588-8cef-93a5296d1bfe"
+                        frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+            </div>
+        </div>
+
+        <div class="resource-card">
+            <h2>Project Objectives</h2>
+            <ul>
+                <li>Develop an accurate AI model for classifying recyclable items from images.</li>
+                <li>Source diverse training data from multiple continents to ensure global representation.</li>
+                <li>Educate users on recycling categories through simple, real-time feedback.</li>
+                <li>Address biases in AI systems by aligning our project with insights from "Unmasking AI."</li>
+
+
+            </ul>
+        </div>
+
+        <div class="resource-card">
+            <h2>Implementation Details</h2>
+            <p>
+                The scope of this project includes developing an AI-driven image classification tool specifically
+                tailored for identifying recyclable materials.
+                Our focus is on accurately categorizing common recyclables such as plastics, metals, glass, and paper
+                using machine learning models built with Teachable Machine.
+                The dataset is intentionally curated to represent a variety of global contexts, reducing biases and
+                increasing the effectiveness of the tool worldwide.
+                The implementation will include real-time interaction, educational feedback, and practical guidance to
+                support users' recycling decisions,
+                ultimately promoting greater sustainability awareness and environmental responsibility.
+            </p>
+
+            <div class="center-image-container" style="margin-bottom: 0;">
+                <img src="Screenshot%202025-04-22%20003100.png" alt="Girl with recycling bin" width="400" height="300"/>
+            </div>
+
 
         </div>
-        <div id="prediction-container"></div>
+
+        <div class="resource-card">
+            <h2>Data Curation</h2>
+            <p>
+                For our dataset curation, we gathered images from diverse sources including Google, Reddit, and various
+                online discussion boards, ensuring comprehensive geographic representation from Africa, Europe, North
+                America, South America, Asia, and Australia.
+                We have total of 227 images. To achieve balanced coverage, we aimed for approximately four
+                representative images per continent for
+                each recyclable material: plastic, paper, glass, and metal.
+                This selection strategy captures global variations in recycling materials, thereby improving the
+                accuracy of our classifier across different regions and communities.
+            </p>
+            <!--
+            put in a grid the screenshots of some screenshots related to the training
+            -->
+            <div class="image-grid">
+                <img src="category.png" alt="Google Drive Category Breakdown" width="350" height="300">
+                <img src="continent.png" alt="Google Drive Continent Breakdown" width="350" height="300">
+                <img src="old%20machinee.png" alt="Teachable Machine First iteration" width="350" height="300">
+                <img src="new%20machine%20training.png" alt="Latest teachable machine model" width="350" height="300">
+            </div>
+        </div>
+
+        <div class="resource-card">
+            <h2>Updates on the Teachable Machine</h2>
+            <p>
+                The changes we made to the Teachable Machine include removing oddly cropped images that showed only
+                labels rather than the actual plastic or glass, which reduced our glass samples from 56 to 49 and our
+                plastic samples from 72 to 54.
+                From doing that, our model was not getting confused as much as it did before. We also cut training from
+                200 epochs down to 100, kept the batch size at 16, and lowered the learning rate from 0.01 to 0.001.
+                Even with fewer images, the results improved: glass accuracy rose from 67% to 88%, plastic from 45% to
+                67%, and metal edged up to 70% (paper dipped slightly from 64% to 60%). Overall, the model now learns
+                more smoothly,
+                focusing on shape and texture rather than just bottle labels and delivers more reliable predictions
+                without overfitting.
+            </p>
+
+            <div class="center-image-container" style="margin-bottom: 0">
+                <img src="chartt.png" alt="Data Chart" width="600" height="300"/>
+            </div>
+        </div>
+
+        <div class="resource-card">
+            <h2>Lessons Learned</h2>
+            <p>
+                Initially, our model often confused paper and cardboard. Despite numerous examples, the visual
+                distinction across regions was ambiguous. We resolved this by combining them into one "paper" category,
+                which improved classifier performance.
+                We also discovered that recyclable items, like glass bottles, differ in appearance across continents.
+                Increasing the number of training epochs further sharpened the model’s recognition and performance.
+            </p>
+        </div>
+
+        <!-- Teachable Machine AI Model Section -->
+        <div class="resource-card">
+            <h2>Teachable Machine Image Model</h2>
+            <p>
+                Click the button below to start the model. It will request access to your webcam and then display
+                real-time predictions (for glass, paper, metal, and plastic) as progress bars. For best results,
+                please hold the item closer to the camera and ensure your face is not visible in the frame.
+            </p>
+            <button class="button" id="start-btn" type="button" onclick="init()">Start Model</button>
+
+            <!--
+              Wrap webcam & overlay in a single container to place the emoji absolutely over it
+            -->
+            <div id="webcam-wrapper" class="webcam-wrapper"> <!-- <-- added wrapper -->
+                <div id="webcam-container"></div>
+                <div id="emoji-overlay" class="emoji-overlay"></div> <!-- <-- new overlay for emojis -->
+
+            </div>
+            <div id="prediction-container"></div>
+        </div>
+        z
 
     </div>
+
+
 </main>
 
 <footer class="footer">
@@ -91,14 +306,19 @@
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 
 <script type="text/javascript">
+    //the model's url, hosted on google
     const URL = "https://teachablemachine.withgoogle.com/models/-v-Hne_8m/";
 
     let model, webcam, maxPredictions;
 
+    /*
+    to get an accurate reading, we sample the past 10 predictions
+     */
     let rollingPredictions = [];
 
     const ROLLING_WINDOW_SIZE = 10;
 
+    // Map labels to emojis
     const labelToEmoji = {
         "Glass": "🍾",
         "Metal": "⚙️",
@@ -106,6 +326,8 @@
         "Plastic": "🧴"
     };
 
+    // this code is provided by google
+    // it loads the remote model and sets up webcam permissions
     async function init() {
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
@@ -137,6 +359,9 @@
         webcamContainer.innerHTML = "";
         webcamContainer.appendChild(webcam.canvas);
 
+        // in the prediction container we put the results of what our model
+        // thinks it's seeing
+        // we also have some progress bars for every category
         const predictionContainer = document.getElementById("prediction-container");
         predictionContainer.innerHTML = "";
         for (let i = 0; i < maxPredictions; i++) {
@@ -192,8 +417,12 @@
         for (let p of predictions) {
             framePredictions[p.className] = p.probability;
         }
+
+        //store the prediction in the array
         rollingPredictions.push(framePredictions);
 
+        //we only want to store last 10, if it goes above that
+        // we remove the first element
         if (rollingPredictions.length > ROLLING_WINDOW_SIZE) {
             rollingPredictions.shift();
         }
@@ -234,5 +463,6 @@
 </script>
 
 <script src="page.js"></script>
+<script src="tmachines.js"></script>
 </body>
 </html>
